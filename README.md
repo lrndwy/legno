@@ -20,7 +20,7 @@ Proyek ini adalah aplikasi manajemen berbasis Django.
    ```
    python -m venv venv
    source venv/bin/activate  # Untuk Unix atau MacOS
-   venv\Scripts\activate  # Untuk Windows
+   venv\Scripts\activate  # Untuk Windows (Gunakan cmd. jangan gunakan PowerShell)
    ```
 
 3. Instal dependensi:
