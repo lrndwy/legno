@@ -12,8 +12,8 @@ Proyek ini adalah aplikasi manajemen berbasis Django.
 
 1. Clone repositori ini:
    ```
-   git clone https://github.com/username/nama-proyek.git
-   cd nama-proyek
+   git clone https://github.com/lrndwy/legno.git
+   cd legno
    ```
 
 2. Buat dan aktifkan virtual environment:
