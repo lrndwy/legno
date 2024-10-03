@@ -52,21 +52,9 @@ class DokumenAdmin(admin.ModelAdmin):
         return status.replace('_', ' ').title()
     status_terpilih.short_description = 'Status'
 
-class ProgressAdminForm(ModelForm):
-    class Meta:
-        model = progress
-        fields = '__all__'
-        widgets = {
-            'proyek': forms.Select(attrs={'style': 'display:none;'}),
-            'dokumen': forms.Select(attrs={'style': 'display:none;'}),
-        }
 
 @admin.register(progress)
 class ProgressAdmin(admin.ModelAdmin):
-    form = ProgressAdminForm
     list_display = ('nama_progress', 'persentase', 'status', 'tanggal_update', 'tipe')
     search_fields = ('nama_progress',)
     list_filter = ('status', 'tipe')
-
-    class Media:
-        js = ('js/progress_admin.js',)
