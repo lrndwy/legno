@@ -1,24 +1,21 @@
 from django.db import models
 
-
 # Create your models here.
 class proyek(models.Model):
+    nama_proyek = models.CharField(max_length=255, verbose_name="Nama Proyek")
     nama_paket_pekerjaan = models.CharField(max_length=255, verbose_name="Nama Paket Pekerjaan")
     sub_bidang_pekerjaan = models.CharField(max_length=255, verbose_name="Sub Bidang Pekerjaan")
     peruntukan_bangunan = models.CharField(max_length=255, verbose_name="Peruntukan Bangunan")
     total_volume_atau_area = models.CharField(max_length=255, verbose_name="Total Volume atau Area")
-    lokasi = models.CharField(max_length=255, verbose_name="Lokasi")
-    PJ_atau_PPK_nama = models.CharField(max_length=255, verbose_name="Nama PJ atau PBK")
-    PJ_atau_PPK_alamat_telp = models.CharField(max_length=255, verbose_name="Alamat dan Telepon PJ atau PBK")
-    kontrak_no_tgl = models.CharField(max_length=255, verbose_name="Nomor dan Tanggal Kontrak")
-    kontrak_nilai = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Nilai Kontrak")
-    deskripsi = models.TextField(verbose_name="Deskripsi")
+    lokasi_proyek = models.CharField(max_length=255, verbose_name="Lokasi Proyek")
     tanggal_mulai = models.DateField(verbose_name="Tanggal Mulai")
-    tanggal_selesai = models.DateField(verbose_name="Tanggal Selesai")
+    target_selesai = models.DateField(verbose_name="Target Selesai")
+    nama_client = models.CharField(max_length=255, verbose_name="Nama Client")
+    no_kontrak = models.CharField(max_length=255, verbose_name="Nomor Kontrak")
+    nilai_kontrak = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Nilai Kontrak")
+    rencana_progress = models.IntegerField(verbose_name="Rencana Progress (%)")
+    actual_progress = models.IntegerField(verbose_name="Actual Progress (%)")
     tanggal_update = models.DateField(auto_now=True, verbose_name="Tanggal Update")
-    sp_kontrak = models.IntegerField(verbose_name="Status Progress Kontrak (%)")
-    sp_prestasi_kerja = models.IntegerField(verbose_name="Status Progress Prestasi Kerja (%)")
-
 
     def __str__(self):
         return self.nama_paket_pekerjaan
