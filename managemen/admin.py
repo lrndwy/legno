@@ -10,18 +10,19 @@ class ProyekAdmin(admin.ModelAdmin):
             'fields': ('nama_paket_pekerjaan', 'sub_bidang_pekerjaan', 'peruntukan_bangunan', 'total_volume_atau_area', 'lokasi', 'deskripsi')
         }),
         ('Pengguna Jasa atau Penjabat Pembuat Komitmen', {
-            'fields': ('PJ_atau_PBK_nama', 'PJ_atau_PBK_alamat_telp')
+            'fields': ('PJ_atau_PPK_nama', 'PJ_atau_PPK_alamat_telp')
         }),
         ('Kontrak (dalam Rupiah termasuk PPN & PPh)', {
             'fields': ('kontrak_no_tgl', 'kontrak_nilai')
         }),
         ('Tanggal', {
-            'fields': ('tanggal_mulai', 'tanggal_selesai', 'tanggal_update')
+            'fields': ('tanggal_mulai', 'tanggal_selesai')
         }),
         ('Status Progress', {
             'fields': ('sp_kontrak', 'sp_prestasi_kerja')
         }),
     )
+    readonly_fields = ('tanggal_update',)
 
 @admin.register(dokumen)
 class DokumenAdmin(admin.ModelAdmin):
