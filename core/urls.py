@@ -21,7 +21,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('managemen.urls')),  # Tambahkan baris ini
+    path('managemen/', include('managemen.urls')),  # Tambahkan baris ini
+    path('', admin.site.urls, name='admin_login'),
 ]
 
 if settings.DEBUG:
