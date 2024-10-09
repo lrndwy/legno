@@ -16,7 +16,15 @@ class proyek(models.Model):
     rencana_progress = models.IntegerField(verbose_name="Rencana Progress (%)")
     actual_progress = models.IntegerField(verbose_name="Actual Progress (%)")
     tanggal_update = models.DateField(auto_now=True, verbose_name="Tanggal Update")
-
+    
+    @property
+    def rencana_progress_persen(self):
+        return f"{self.rencana_progress}%"
+    
+    @property
+    def actual_progress_persen(self):
+        return f"{self.actual_progress}%"
+    
     def __str__(self):
         return self.nama_paket_pekerjaan
 

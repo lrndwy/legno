@@ -46,3 +46,9 @@ Proyek ini adalah aplikasi manajemen berbasis Django.
 7. Buka browser dan akses `http://localhost:8000`
 
 
+
+
+
+
+
+
