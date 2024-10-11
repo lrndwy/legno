@@ -44,6 +44,7 @@ class ProyekAdmin(admin.ModelAdmin):
     )
     readonly_fields = ('tanggal_update',)
     actions = ['print_selected_proyek']
+    ordering = ('id',)  # Menambahkan pengurutan berdasarkan id secara descending
 
     def get_urls(self):
         urls = super().get_urls()
@@ -127,7 +128,7 @@ class ProyekAdmin(admin.ModelAdmin):
         def inner(obj):
             value = getattr(obj, field_name)
             return format_html('<div style="text-align: center;">{}</div>', value)
-        inner.short_description = field_name
+        inner.short_description = field_name.replace('_', ' ').title()
         return inner
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
@@ -156,5 +157,5 @@ class DokumenAdmin(admin.ModelAdmin):
         def inner(obj):
             value = getattr(obj, field_name)
             return format_html('<div style="text-align: center;">{}</div>', value)
-        inner.short_description = field_name
+        inner.short_description = field_name.replace('_', ' ').title()
         return inner
