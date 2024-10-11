@@ -20,7 +20,7 @@ class ProyekAdmin(admin.ModelAdmin):
         'section_separator_3',
         'no_kontrak', 'nilai_kontrak',
         'section_separator_4',
-        'rencana_progress', 'actual_progress', 'tanggal_update',
+        'rencana_progress_persen', 'actual_progress_persen', 'tanggal_update',
         'section_separator_5',
         'get_print_button'
     )
