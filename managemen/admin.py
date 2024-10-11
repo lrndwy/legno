@@ -11,7 +11,7 @@ from io import BytesIO
 @admin.register(proyek)
 class ProyekAdmin(admin.ModelAdmin):
     list_display = (
-        'id',  # Menggunakan 'id' sebagai pengganti 'nomor'
+        'id',
         'nama_proyek', 'nama_paket_pekerjaan', 'sub_bidang_pekerjaan', 'peruntukan_bangunan', 'total_volume_atau_area', 'lokasi_proyek',
         'section_separator_1',
         'tanggal_mulai', 'target_selesai',
@@ -20,7 +20,7 @@ class ProyekAdmin(admin.ModelAdmin):
         'section_separator_3',
         'no_kontrak', 'nilai_kontrak',
         'section_separator_4',
-        'rencana_progress_persen', 'actual_progress_persen', 'tanggal_update',
+        'rencana_progress', 'actual_progress', 'tanggal_update',
         'section_separator_5',
         'get_print_button'
     )
@@ -39,7 +39,7 @@ class ProyekAdmin(admin.ModelAdmin):
             'fields': ('no_kontrak', 'nilai_kontrak')
         }),
         ('Progress', {
-            'fields': ('rencana_progress_persen', 'actual_progress_persen')
+            'fields': ('rencana_progress', 'actual_progress')
         }),
     )
     readonly_fields = ('tanggal_update',)
@@ -77,14 +77,6 @@ class ProyekAdmin(admin.ModelAdmin):
     def section_separator_5(self, obj):
         return format_html('<hr style="border-top: 2px solid #000; margin: 10px 0;">')
     section_separator_5.short_description = ''
-
-    def rencana_progress_persen(self, obj):
-        return obj.rencana_progress_persen()
-    rencana_progress_persen.short_description = "Rencana Progress (%)"
-
-    def actual_progress_persen(self, obj):
-        return obj.actual_progress_persen()
-    actual_progress_persen.short_description = "Actual Progress (%)"
 
     def print_proyek(self, request, proyek_id):
         proyek_obj = proyek.objects.get(id=proyek_id)
