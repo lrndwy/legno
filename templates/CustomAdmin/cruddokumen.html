@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <c-layouts.dashboard>
+    <c-slot name="sidebar">
+      <c-sidebar.main></c-sidebar.main>
+    </c-slot>
+
+    <c-slot name="content">
+      {% if edit %}
+        <div class="p-4">
+          <h2 class="text-2xl font-bold mb-4">Edit Dokumen</h2>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nama Dokumen</label>
+              <input type="text" name="nama_dokumen" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ dokumen.nama_dokumen }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">File</label>
+              <input type="file" name="file" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+              <p class="mt-1 text-sm text-gray-500">File saat ini: {{ dokumen.file.name }}</p>
+            </div>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Update</button>
+          </form>
+        </div>
+      {% elif tambah %}
+        <div class="p-4">
+          <h2 class="text-2xl font-bold mb-4">Tambah Dokumen Baru</h2>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nama Dokumen</label>
+              <input type="text" name="nama_dokumen" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">File</label>
+              <input type="file" name="file" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Simpan</button>
+          </form>
+        </div>
+      {% else %}
+        <div class="p-4">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold">Daftar Dokumen</h2>
+            <a href="?tambah=1" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Tambah Dokumen</a>
+          </div>
+          
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3">Nama Dokumen</th>
+                  <th scope="col" class="px-6 py-3">File</th>
+                  <th scope="col" class="px-6 py-3">Tanggal Upload</th>
+                  <th scope="col" class="px-6 py-3">Tanggal Update</th>
+                  <th scope="col" class="px-6 py-3">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for d in dokumen %}
+                <tr class="bg-white border-b hover:bg-gray-50">
+                  <td class="px-6 py-4">{{ d.nama_dokumen }}</td>
+                  <td class="px-6 py-4">
+                    <a href="{{ d.file.url }}" class="text-blue-600 hover:underline" target="_blank">
+                      Lihat File
+                    </a>
+                  </td>
+                  <td class="px-6 py-4">{{ d.tanggal_upload }}</td>
+                  <td class="px-6 py-4">{{ d.tanggal_update }}</td>
+                  <td class="px-6 py-4">
+                    <a href="?edit={{ d.id }}" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2">Edit</a>
+                    <a href="?hapus={{ d.id }}" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      {% endif %}
+    </c-slot>
+  </c-layouts.dashboard>
+{% endblock content %}

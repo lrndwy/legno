@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="p-8 bg-white">
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <h1 class="text-2xl font-bold mb-2">DETAIL PROYEK</h1>
+    <h2 class="text-xl">{{ proyek.nama_proyek }}</h2>
+  </div>
+
+  <!-- Informasi Proyek -->
+  <div class="grid grid-cols-2 gap-6 mb-8">
+    <div class="border rounded-lg p-4">
+      <h3 class="font-bold mb-4 text-lg border-b pb-2">Informasi Umum</h3>
+      <table class="w-full">
+        <tr>
+          <td class="py-2 font-semibold">Nama Paket Pekerjaan</td>
+          <td class="py-2">: {{ proyek.nama_paket_pekerjaan }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 font-semibold">Sub Bidang Pekerjaan</td>
+          <td class="py-2">: {{ proyek.sub_bidang_pekerjaan }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 font-semibold">Peruntukan Bangunan</td>
+          <td class="py-2">: {{ proyek.peruntukan_bangunan }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 font-semibold">Total Volume/Area</td>
+          <td class="py-2">: {{ proyek.total_volume_atau_area }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 font-semibold">Lokasi Proyek</td>
+          <td class="py-2">: {{ proyek.lokasi_proyek }}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="border rounded-lg p-4">
+      <h3 class="font-bold mb-4 text-lg border-b pb-2">Informasi Kontrak</h3>
+      <table class="w-full">
+        <tr>
+          <td class="py-2 font-semibold">Nama Client</td>
+          <td class="py-2">: {{ proyek.nama_client }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 font-semibold">Nomor Kontrak</td>
+          <td class="py-2">: {{ proyek.no_kontrak }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 font-semibold">Nilai Kontrak</td>
+          <td class="py-2">: Rp {{ proyek.nilai_kontrak|floatformat:2 }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="border rounded-lg p-4 mb-8">
+    <h3 class="font-bold mb-4 text-lg border-b pb-2">Progress Proyek</h3>
+    <table class="w-full">
+      <tr>
+        <td class="py-2 font-semibold">Tanggal Mulai</td>
+        <td class="py-2">: {{ proyek.tanggal_mulai }}</td>
+      </tr>
+      <tr>
+        <td class="py-2 font-semibold">Target Selesai</td>
+        <td class="py-2">: {{ proyek.target_selesai }}</td>
+      </tr>
+      <tr>
+        <td class="py-2 font-semibold">Rencana Progress</td>
+        <td class="py-2">: {{ proyek.rencana_progress_persen }}</td>
+      </tr>
+      <tr>
+        <td class="py-2 font-semibold">Actual Progress</td>
+        <td class="py-2">: {{ proyek.actual_progress_persen }}</td>
+      </tr>
+      <tr>
+        <td class="py-2 font-semibold">Tanggal Update</td>
+        <td class="py-2">: {{ proyek.tanggal_update }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Tombol Print hanya muncul di layar -->
+  <div class="print:hidden text-center">
+    <button onclick="window.print()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+      Cetak Dokumen
+    </button>
+  </div>
+</div>
+
+<style>
+  @media print {
+    body {
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    @page {
+      size: A4;
+      margin: 1cm;
+    }
+  }
+</style>
+{% endblock %}

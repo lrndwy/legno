@@ -21,9 +21,8 @@ from django.conf.urls.static import static
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('managemen/', include('managemen.urls')),
-    path('', RedirectView.as_view(url='/admin/'), name='home'),  # Redirect root ke admin
+    path('admin/', admin.site.urls),  # Pastikan ini ada di atas
+    path('', include('managemen.urls')),  # URL aplikasi managemen
 ]
 
 if settings.DEBUG:

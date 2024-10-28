@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'managemen',  # Pastikan baris ini ada
+    'django_cotton',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR / 'templates' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -182,13 +183,15 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
 
         # Url that gets reversed (Permissions can be added)
-        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        
+
+        # External url that opens in a new window (Permissions can be added)
+        {"name": "Back to Dashboard", "url": "dashboard", "new_window": False},
 
         # model admin to link to (Permissions checked against model)
-        {"model": "auth.User"},
+
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
-        {"app": "managemen"},
     ],
 
     #############
@@ -237,7 +240,7 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "managemen.proyek": "fas fa-building",
-        "managemen.progress": "fas fa-chart-line",
+        "managemen.progress": "fas fa-chart-line", 
         "managemen.dokumen": "fas fa-file-alt",
     },
     # Icons that are used when one is not manually specified
@@ -307,6 +310,13 @@ JAZZMIN_UI_TWEAKS = {
     }
 }
 
+LOGIN_REDIRECT_URL = '/dashboard/'
+
+LOGOUT_REDIRECT_URL = '/login/'
+
+LOGIN_URL = '/'
+
+
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-LOGIN_REDIRECT_URL = '/admin/'
+COTTON_DIR = 'components'

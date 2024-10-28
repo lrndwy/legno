@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <c-layouts.dashboard>
+    <c-slot name="sidebar">
+      <c-sidebar.karyawan></c-sidebar.karyawan>
+    </c-slot>
+
+    <c-slot name="content">
+      
+
+      <div class="p-4">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold">Daftar Proyek</h2>
+          
+        </div>
+        
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table class="w-full text-sm text-left text-gray-500 whitespace-nowrap">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3">Nama Proyek</th>
+                <th scope="col" class="px-6 py-3">Nama Paket Pekerjaan</th>
+                <th scope="col" class="px-6 py-3">Sub Bidang Pekerjaan</th>
+                <th scope="col" class="px-6 py-3">Peruntukan Bangunan</th>
+                <th scope="col" class="px-6 py-3">Total Volume/Area</th>
+                <th scope="col" class="px-6 py-3">Lokasi Proyek</th>
+                <th scope="col" class="px-6 py-3">Tanggal Mulai</th>
+                <th scope="col" class="px-6 py-3">Target Selesai</th>
+                <th scope="col" class="px-6 py-3">Nama Client</th>
+                <th scope="col" class="px-6 py-3">No Kontrak</th>
+                <th scope="col" class="px-6 py-3">Nilai Kontrak</th>
+                <th scope="col" class="px-6 py-3">Rencana Progress</th>
+                <th scope="col" class="px-6 py-3">Actual Progress</th>
+                <th scope="col" class="px-6 py-3">Tanggal Update</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in proyek %}
+              <tr class="bg-white border-b hover:bg-gray-50">
+                <td class="px-6 py-4">{{ p.nama_proyek }}</td>
+                <td class="px-6 py-4">{{ p.nama_paket_pekerjaan }}</td>
+                <td class="px-6 py-4">{{ p.sub_bidang_pekerjaan }}</td>
+                <td class="px-6 py-4">{{ p.peruntukan_bangunan }}</td>
+                <td class="px-6 py-4">{{ p.total_volume_atau_area }}</td>
+                <td class="px-6 py-4">{{ p.lokasi_proyek }}</td>
+                <td class="px-6 py-4">{{ p.tanggal_mulai }}</td>
+                <td class="px-6 py-4">{{ p.target_selesai }}</td>
+                <td class="px-6 py-4">{{ p.nama_client }}</td>
+                <td class="px-6 py-4">{{ p.no_kontrak }}</td>
+                <td class="px-6 py-4">{{ p.nilai_kontrak }}</td>
+                <td class="px-6 py-4">{{ p.rencana_progress_persen }}</td>
+                <td class="px-6 py-4">{{ p.actual_progress_persen }}</td>
+                <td class="px-6 py-4">{{ p.tanggal_update }}</td>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+        
+    </c-slot>
+  </c-layouts.dashboard>
+{% endblock content %}

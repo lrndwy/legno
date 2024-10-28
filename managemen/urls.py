@@ -1,10 +1,14 @@
 from django.urls import path
-from .admin import ProyekAdmin
-from django.contrib import admin
-
-app_name = 'managemen'  # Tambahkan ini untuk memberikan namespace unik
+from . import views
 
 urlpatterns = [
-    path('proyek/<int:proyek_id>/print/', ProyekAdmin.print_proyek, name='print_proyek'),
-    path('proyek/print_all/', ProyekAdmin.print_all_proyek, name='print_all_proyek'),
+  path('dashboard/', views.dashboard, name='dashboard'),  # Ubah dari '' menjadi 'dashboard/'
+  path('crudproyek/', views.crudproyek, name='crudproyek'),
+  path('cruddokumen/', views.cruddokumen, name='cruddokumen'),
+  path('print_proyek/<int:id>', views.print_proyek, name='print_proyek'),
+  path('logout/', views.logout, name='logout'),
+  path('', views.login_view, name='login'),
+  path('karyawan/', views.karyawan, name='karyawan'),
+  path('proyek/', views.proyek, name='proyek'),
+  path('dokumen/', views.dokumen, name='dokumen'),
 ]

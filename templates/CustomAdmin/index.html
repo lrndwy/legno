@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <c-layouts.dashboard>
+    <c-slot name="sidebar">
+      <c-sidebar.main></c-sidebar.main>
+    </c-slot>
+
+    <c-slot name="content">
+      <h1>Dashboard</h1>
+    </c-slot>
+  </c-layouts.dashboard>
+{% endblock content %}

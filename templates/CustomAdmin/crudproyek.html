@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <c-layouts.dashboard>
+    <c-slot name="sidebar">
+      <c-sidebar.main></c-sidebar.main>
+    </c-slot>
+
+    <c-slot name="content">
+      
+      {% if edit %}
+        <div class="p-4">
+          <h2 class="text-2xl font-bold mb-4">Edit Proyek</h2>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nama Proyek</label>
+              <input type="text" name="nama_proyek" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.nama_proyek }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nama Paket Pekerjaan</label>
+              <input type="text" name="nama_paket_pekerjaan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.nama_paket_pekerjaan }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Sub Bidang Pekerjaan</label>
+              <input type="text" name="sub_bidang_pekerjaan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.sub_bidang_pekerjaan }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Peruntukan Bangunan</label>
+              <input type="text" name="peruntukan_bangunan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.peruntukan_bangunan }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Total Volume atau Area</label>
+              <input type="text" name="total_volume_atau_area" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.total_volume_atau_area }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Lokasi Proyek</label>
+              <input type="text" name="lokasi_proyek" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.lokasi_proyek }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Tanggal Mulai</label>
+              <input type="date" name="tanggal_mulai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.tanggal_mulai|date:'Y-m-d' }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Target Selesai</label>
+              <input type="date" name="target_selesai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.target_selesai|date:'Y-m-d' }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nama Client</label>
+              <input type="text" name="nama_client" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.nama_client }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nomor Kontrak</label>
+              <input type="text" name="no_kontrak" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.no_kontrak }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nilai Kontrak</label>
+              <input type="number" name="nilai_kontrak" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.nilai_kontrak }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Rencana Progress (%)</label>
+              <input type="number" name="rencana_progress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.rencana_progress }}">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Actual Progress (%)</label>
+              <input type="number" name="actual_progress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ proyek.actual_progress }}">
+            </div>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Update</button>
+          </form>
+        </div>
+      {% elif tambah %}
+        <div class="p-4">
+          <h2 class="text-2xl font-bold mb-4">Tambah Proyek Baru</h2>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nama Proyek</label>
+              <input type="text" name="nama_proyek" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nama Paket Pekerjaan</label>
+              <input type="text" name="nama_paket_pekerjaan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Sub Bidang Pekerjaan</label>
+              <input type="text" name="sub_bidang_pekerjaan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Peruntukan Bangunan</label>
+              <input type="text" name="peruntukan_bangunan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Total Volume atau Area</label>
+              <input type="text" name="total_volume_atau_area" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Lokasi Proyek</label>
+              <input type="text" name="lokasi_proyek" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Tanggal Mulai</label>
+              <input type="date" name="tanggal_mulai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Target Selesai</label>
+              <input type="date" name="target_selesai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nama Client</label>
+              <input type="text" name="nama_client" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nomor Kontrak</label>
+              <input type="text" name="no_kontrak" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Nilai Kontrak</label>
+              <input type="number" name="nilai_kontrak" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Rencana Progress (%)</label>
+              <input type="number" name="rencana_progress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900">Actual Progress (%)</label>
+              <input type="number" name="actual_progress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Simpan</button>
+          </form>
+        </div>
+      {% else %}
+        <div class="p-4">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold">Daftar Proyek</h2>
+            <a href="?tambah=1" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Tambah Proyek</a>
+          </div>
+          
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 whitespace-nowrap">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3">Nama Proyek</th>
+                  <th scope="col" class="px-6 py-3">Nama Paket Pekerjaan</th>
+                  <th scope="col" class="px-6 py-3">Sub Bidang Pekerjaan</th>
+                  <th scope="col" class="px-6 py-3">Peruntukan Bangunan</th>
+                  <th scope="col" class="px-6 py-3">Total Volume/Area</th>
+                  <th scope="col" class="px-6 py-3">Lokasi Proyek</th>
+                  <th scope="col" class="px-6 py-3">Tanggal Mulai</th>
+                  <th scope="col" class="px-6 py-3">Target Selesai</th>
+                  <th scope="col" class="px-6 py-3">Nama Client</th>
+                  <th scope="col" class="px-6 py-3">No Kontrak</th>
+                  <th scope="col" class="px-6 py-3">Nilai Kontrak</th>
+                  <th scope="col" class="px-6 py-3">Rencana Progress</th>
+                  <th scope="col" class="px-6 py-3">Actual Progress</th>
+                  <th scope="col" class="px-6 py-3">Tanggal Update</th>
+                  <th scope="col" class="px-6 py-3">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for p in proyek %}
+                <tr class="bg-white border-b hover:bg-gray-50">
+                  <td class="px-6 py-4">{{ p.nama_proyek }}</td>
+                  <td class="px-6 py-4">{{ p.nama_paket_pekerjaan }}</td>
+                  <td class="px-6 py-4">{{ p.sub_bidang_pekerjaan }}</td>
+                  <td class="px-6 py-4">{{ p.peruntukan_bangunan }}</td>
+                  <td class="px-6 py-4">{{ p.total_volume_atau_area }}</td>
+                  <td class="px-6 py-4">{{ p.lokasi_proyek }}</td>
+                  <td class="px-6 py-4">{{ p.tanggal_mulai }}</td>
+                  <td class="px-6 py-4">{{ p.target_selesai }}</td>
+                  <td class="px-6 py-4">{{ p.nama_client }}</td>
+                  <td class="px-6 py-4">{{ p.no_kontrak }}</td>
+                  <td class="px-6 py-4">{{ p.nilai_kontrak }}</td>
+                  <td class="px-6 py-4">{{ p.rencana_progress_persen }}</td>
+                  <td class="px-6 py-4">{{ p.actual_progress_persen }}</td>
+                  <td class="px-6 py-4">{{ p.tanggal_update }}</td>
+                  <td class="px-6 py-4">
+                    <a href="?edit={{ p.id }}" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2">Edit</a>
+                    <a href="?hapus={{ p.id }}" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                    <a href="{% url 'print_proyek' p.id %}" target="_blank" class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5">Cetak</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      {% endif %}
+        
+    </c-slot>
+  </c-layouts.dashboard>
+{% endblock content %}
