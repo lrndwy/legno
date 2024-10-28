@@ -33,6 +33,7 @@
                 <th scope="col" class="px-6 py-3">Rencana Progress</th>
                 <th scope="col" class="px-6 py-3">Actual Progress</th>
                 <th scope="col" class="px-6 py-3">Tanggal Update</th>
+                <th scope="col" class="px-6 py-3">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -52,6 +53,9 @@
                 <td class="px-6 py-4">{{ p.rencana_progress_persen }}</td>
                 <td class="px-6 py-4">{{ p.actual_progress_persen }}</td>
                 <td class="px-6 py-4">{{ p.tanggal_update }}</td>
+                <td class="px-6 py-4">
+                  <a href="{% url 'print_proyek' p.id %}" target="_blank" class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5">Cetak</a>
+                </td>
               {% endfor %}
             </tbody>
           </table>

@@ -140,7 +140,7 @@ def cruddokumen(request):
     return render(request, 'CustomAdmin/cruddokumen.html', context)
 
 @login_required
-@user_passes_test(is_superuser)
+@user_passes_test(login_check)
 def print_proyek(request, id):
     data = Proyek.objects.get(id=id)
     context = {
